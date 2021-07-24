@@ -5,8 +5,11 @@
     <title>Admin panel</title>
     <link href="../table.css" rel="stylesheet" type="text/css">
 </head>
+<footer>
+    <%- include('nav.html') %>
+</footer>
 <body>
-    <input type="date" onchange="return onDateChange()" value=<%= today %> id="date">
+    <input type="date" onchange="return onDateChange()" value=<%= today %> id="date" style="float: right">
     <table>
         <tr>
             <td>Name</td>

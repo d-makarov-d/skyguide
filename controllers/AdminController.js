@@ -40,6 +40,16 @@ class AdminController {
 			}
 		});
 
+		this.router.get('/allsky', async (req, res) => {
+			const date = utils.onlyDate(new Date())
+			const grouped = await adminService.regsAfter(date)
+			if (ensureAuthorised(req, res)) {
+				res.render(path.resolve(process.env.PWD, 'public', 'admin_all_table'), {
+					grouped
+				})
+			}
+		});
+
 		this.router.get('/login', (req, res) => {
 			if (req.session.loggedIn) {
 				res.send('already logged in');

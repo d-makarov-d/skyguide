@@ -25,6 +25,17 @@ class AdminService {
 	}
 
 	/**
+	 * Returns registrations after provided date, grouped by date
+	 * @param {Date} date
+	 * @return {Promise<Array>}
+	 */
+	async regsAfter(date) {
+		const onlyDate = utils.onlyDate(date);
+		const all = await this.skies.find({date: { $gte: onlyDate } });
+		return utils.groupBy(all, (el) => el.date)
+	}
+
+	/**
 	 * Handles authorisation of admin and throws error if something wrong
 	 * @param {Request} req Express Request object
 	 * @return {Promise<void>}

@@ -1,11 +1,12 @@
 const express = require('express')
 const path = require('path')
 const MessageException = require('../utils/MessageException')
+const utils = require('../utils/utils')
 
 /**
  * Ensures admin authorised
  * @param {Request} req Express Request object
- * * @param {Request} res Express Response object
+ * @param {Request} res Express Response object
  * @return boolean Is authorised
  */
 function ensureAuthorised(req,res) {
@@ -24,8 +25,18 @@ class AdminController {
 		this.router = express.Router();
 
 		this.router.get('/sky', async (req, res) => {
+			let date;
+			if (req.query.date) {
+				date = utils.onlyDate(new Date(req.query.date))
+			} else {
+				date = utils.onlyDate(new Date())
+			}
+			const regs = await adminService.regsOn(date)
 			if (ensureAuthorised(req, res)) {
-
+				res.render(path.resolve(process.env.PWD, 'public', 'admin_table'), {
+					today: date.toISOString().slice(0, 10),
+					regs
+				})
 			}
 		});
 

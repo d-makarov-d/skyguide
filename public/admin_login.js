@@ -24,7 +24,7 @@ async function onAdminLogin() {
 			break;
 		}
 		case 200: {
-			document.location.href = '/admin/sky';
+			document.location.href = `/admin/sky`;
 			break;
 		}
 	}

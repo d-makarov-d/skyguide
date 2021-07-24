@@ -1,14 +1,27 @@
 const crypto = require('crypto');
 const MessageException = require('../utils/MessageException');
+const utils = require('../utils/utils');
 
 const failMsg = 'Wrong login or password';
 
 class AdminService {
 	/**
 	 * @param { Model } model Database model for admin
+	 * @param { Model } skies Mongoose model for sky excursion registrations
 	 */
-	constructor(model) {
+	constructor(model, skies) {
 		this.model = model;
+		this.skies = skies;
+	}
+
+	/**
+	 * Returns registrations for provided date
+	 * @param {Date} date
+	 * @return {Promise<Array>}
+	 */
+	async regsOn(date) {
+		const onlyDate = utils.onlyDate(date);
+		return this.skies.find({date: onlyDate});
 	}
 
 	/**

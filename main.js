@@ -19,7 +19,7 @@ const adminApp = express();
     const skyModel = sky(mongoose);
     const adminModel = admin(mongoose);
     const skyService = new SkyService(skyModel);
-    const adminService = new AdminService(adminModel);
+    const adminService = new AdminService(adminModel, skyModel);
     const userController = new UserController(skyService);
 
     const adminController = new AdminController(adminService)

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <link href="../table.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <input type="date" onchange="return onDateChange()" value=<%= today %> id="date">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Contact</td>
+            <td>Number</td>
+        </tr>
+        <% regs.forEach((reg) => { %>
+            <tr>
+                <td><%= reg.name %></td>
+                <td><%= reg.phone %></td>
+                <td><%= reg.people %></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+<script src="../admin_table.js"></script>
+</html>

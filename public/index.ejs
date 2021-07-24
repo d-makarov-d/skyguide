@@ -13,9 +13,12 @@
                 placeholder="phone number"
                 required="required"
                 id="phone">
-        <input type="date" required="required" id="date">
+        <input type="date" required="required" onchange="return onDateChange()" value=<%= today %> id="date">
+        <a>people: </a>
+        <input type="number" value="1" id="people">
         <input type="submit">
     </form>
+    <a>available places </a><a id="free"><%= free %></a><a> / <%= overall %></a>
 </body>
 <script src="client.js"></script>
 </html>

@@ -1,7 +1,9 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
 const mongooseLoader = require('./loaders/MongooseLoader');
-const path = require('path')
+const path = require('path');
+const https = require('https');
+const fs = require('fs');
 const sky = require('./models/Sky');
 const admin = require('./models/Admin');
 const SkyService = require('./services/SkyService')
@@ -12,6 +14,13 @@ const SuperuserController = require('./controllers/SuperuserController');
 
 const app = express();
 const adminApp = express();
+const adminOptions = {
+    key: fs.readFileSync('private/server-key.pem'),
+    cert: fs.readFileSync('private/server-crt.pem'),
+    ca: fs.readFileSync('private/ca-crt.pem'),
+    requestCert: true,
+    rejectUnauthorized: true,
+};
 
 (async () => {
     const mongoose = await mongooseLoader;
@@ -46,5 +55,6 @@ const adminApp = express();
     const superuserController = new SuperuserController(adminService)
     adminApp.use('/', superuserController.getRouter());
 
-    adminApp.listen(process.env.SU_PORT, () => {});
+    const adminServer = https.createServer(adminOptions, adminApp);
+    adminServer.listen(process.env.SU_PORT, () => {});
 })();

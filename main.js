@@ -40,7 +40,7 @@ const adminOptions = {
     }));
     app.set('view engine', 'ejs');
 
-    app.use(helmet())
+    // app.use(helmet()); // while without sll cert
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
     app.use(express.static(path.resolve(process.env.PWD, 'public')));

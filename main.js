@@ -14,6 +14,10 @@ const AdminController = require('./controllers/AdminController')
 const SuperuserController = require('./controllers/SuperuserController');
 
 const app = express();
+const appOptions = {
+    key: fs.readFileSync(process.env.USERS_KEY),
+    cert: fs.readFileSync(process.env.USERS_CERT),
+}
 const adminApp = express();
 const adminOptions = {
     key: fs.readFileSync('private/server-key.pem'),
@@ -48,9 +52,15 @@ const adminOptions = {
     app.use('/', userController.getRouter());
     app.use('/admin', adminController.getRouter());
 
-    app.listen(process.env.PORT, () => {
-        console.log(`listening at ${process.env.PORT}`);
+    const appServer = https.createServer(appOptions, app);
+    appServer.listen(process.env.PORT, () => {
+        console.log(`Main https server at ${process.env.PORT}`);
     });
+    if (process.env.ENABLE_HTTP) {
+        app.listen(process.env.HTTP_PORT, () => {
+            console.log(`Main http server at ${process.env.HTTP_PORT}`);
+        });
+    }
 
     adminApp.use(helmet())
     adminApp.use(express.urlencoded({ extended: true }));

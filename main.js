@@ -20,9 +20,9 @@ const appOptions = {
 }
 const adminApp = express();
 const adminOptions = {
-    key: fs.readFileSync('private/server-key.pem'),
-    cert: fs.readFileSync('private/server-crt.pem'),
-    ca: fs.readFileSync('private/ca-crt.pem'),
+    key: fs.readFileSync(process.env.ADMIN_KEY),
+    cert: fs.readFileSync(process.env.ADMIN_CERT),
+    ca: fs.readFileSync(process.env.ADMIN_CA),
     requestCert: true,
     rejectUnauthorized: true,
 };
@@ -56,6 +56,7 @@ const adminOptions = {
     appServer.listen(process.env.PORT, () => {
         console.log(`Main https server at ${process.env.PORT}`);
     });
+    console.log(process.env.ENABLE_HTTP === 'true')
     if (process.env.ENABLE_HTTP) {
         app.listen(process.env.HTTP_PORT, () => {
             console.log(`Main http server at ${process.env.HTTP_PORT}`);

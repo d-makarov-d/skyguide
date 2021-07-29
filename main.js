@@ -56,8 +56,7 @@ const adminOptions = {
     appServer.listen(process.env.PORT, () => {
         console.log(`Main https server at ${process.env.PORT}`);
     });
-    console.log(process.env.ENABLE_HTTP === 'true')
-    if (process.env.ENABLE_HTTP) {
+    if (process.env.ENABLE_HTTP === 'true') {
         app.listen(process.env.HTTP_PORT, () => {
             console.log(`Main http server at ${process.env.HTTP_PORT}`);
         });

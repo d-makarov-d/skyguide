@@ -41,6 +41,8 @@ const adminOptions = {
     app.use(cookieSession({
         name: 'session',
         keys: ['1cf51ee69b7fdbe400dcf1792e5607ca', '8a25f16cf50763b2287d9e2030c7f9b6'],
+        httpOnly: true,
+        secure: true,
     }));
     app.set('view engine', 'ejs');
 
@@ -60,6 +62,14 @@ const adminOptions = {
         app.listen(process.env.HTTP_PORT, () => {
             console.log(`Main http server at ${process.env.HTTP_PORT}`);
         });
+    } else {
+        const http = express();
+        http.get('*', (req, res) => {
+            console.log(req.headers.host)
+            console.log(req.url)
+            res.redirect('https://' + req.headers.host + req.url);
+        });
+        http.listen(8080);
     }
 
     adminApp.use(helmet())

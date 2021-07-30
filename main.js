@@ -49,7 +49,7 @@ const adminOptions = {
     app.use(helmet());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
-    app.use(express.static(path.resolve(process.env.PWD, 'public')));
+    app.use(express.static(path.resolve(__dirname, 'public')));
 
     app.use('/', userController.getRouter());
     app.use('/admin', adminController.getRouter());

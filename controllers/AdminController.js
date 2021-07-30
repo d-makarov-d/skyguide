@@ -33,7 +33,7 @@ class AdminController {
 			}
 			const regs = await adminService.regsOn(date)
 			if (ensureAuthorised(req, res)) {
-				res.render(path.resolve(__dirname, 'public', 'layout', 'admin_table'), {
+				res.render(path.resolve('public', 'layout', 'admin_table'), {
 					today: date.toISOString().slice(0, 10),
 					regs
 				})
@@ -44,7 +44,7 @@ class AdminController {
 			const date = utils.onlyDate(new Date())
 			const grouped = await adminService.regsAfter(date)
 			if (ensureAuthorised(req, res)) {
-				res.render(path.resolve(__dirname, 'public', 'layout', 'admin_all_table'), {
+				res.render(path.resolve('public', 'layout', 'admin_all_table'), {
 					grouped
 				})
 			}
@@ -54,7 +54,7 @@ class AdminController {
 			if (req.session.loggedIn) {
 				res.send('already logged in');
 			} else {
-				res.sendFile(path.resolve(__dirname, 'public', 'layout', 'admin_login.html'));
+				res.sendFile(path.resolve('public', 'layout', 'admin_login.html'));
 			}
 		});
 

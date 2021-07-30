@@ -16,7 +16,7 @@ class UserController {
 			const now = utils.onlyDate(new Date())
 			const occupied = await this.skyService.occupied(now)
 			res.render(
-				path.resolve(__dirname, 'public', 'layout', 'index'),
+				path.resolve('public', 'layout', 'index'),
 				{
 					free: conf.skyPlaces - occupied,
 					overall: conf.skyPlaces,

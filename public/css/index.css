@@ -1,0 +1,118 @@
+i.play-rot-st {
+    transition-duration: 0.4s;
+    transition-property: transform;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+i.play-rot-down {
+    transform: rotate(180deg);
+}
+i.play-rot-end {
+    transition-duration: 0.4s;
+    transition-property: transform;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
+
+.tabs {
+    position: absolute;
+    top: 0;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.wtext {
+    color: whitesmoke;
+    height: 4em;
+}
+
+.wtext *  {
+    color: whitesmoke;
+    width: 100%;
+    text-align: center;
+}
+
+.all-center {
+    width: 95%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.validate {
+    color: whitesmoke;
+    width: 100%;
+}
+
+#date {
+    color: whitesmoke;
+    width: 100%;
+}
+
+#phone {
+    color: whitesmoke;
+    width: 100%;
+}
+
+input:invalid {
+    border: red solid 3px;!important;
+}
+
+.all-center .collapsible {
+    opacity: 70%;
+}
+
+.all-center .collapsible > li > div {
+    opacity: 100%;
+}
+
+#people::-webkit-inner-spin-button {
+    opacity: 50%;
+}
+
+#submit {
+    color: black;
+}
+
+#bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/bg_sky_reg.jpg");
+    filter: brightness(50%);
+    background-position: center center;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+
+#about {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #303f9f;
+}
+#about .carousel {
+    height: 100%;
+}
+
+#about .carousel .carousel-item img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)!important;
+}
+
+.page-footer {
+    position: absolute;
+    opacity: 0.5;
+    width: 100%;
+    top: 100%;
+    transform: translateY(-100%);
+}
+
+.page-footer * {
+    color: black;
+    opacity: 1;
+    font-size: medium;
+    text-align: justify;
+}

@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+	document.getElementById('login-form').addEventListener('submit', onAdminLogin);
+});
+
 async function onAdminLogin() {
 	const login = document.getElementById('login').value;
 	const password = document.getElementById('password').value;

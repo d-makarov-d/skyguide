@@ -46,7 +46,7 @@ const adminOptions = {
     }));
     app.set('view engine', 'ejs');
 
-    // app.use(helmet()); // while without sll cert
+    app.use(helmet());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
     app.use(express.static(path.resolve(process.env.PWD, 'public')));
@@ -65,11 +65,9 @@ const adminOptions = {
     } else {
         const http = express();
         http.get('*', (req, res) => {
-            console.log(req.headers.host)
-            console.log(req.url)
             res.redirect('https://' + req.headers.host + req.url);
         });
-        http.listen(8080);
+        http.listen(process.env.HTTP_PORT);
     }
 
     adminApp.use(helmet())

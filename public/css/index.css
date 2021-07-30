@@ -116,3 +116,8 @@ input:invalid {
     font-size: medium;
     text-align: justify;
 }
+
+.col-low {
+    height: 30px !important;
+}
+.valign-wrapper {flex-wrap: wrap;}

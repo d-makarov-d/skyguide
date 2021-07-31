@@ -38,7 +38,8 @@ class SkyService {
 				date,
 				phone: data.phone,
 				name: data.name,
-				people: data.people
+				people: data.people,
+				pin: data.pin,
 			})
 			await obj.save()
 
@@ -58,9 +59,9 @@ class SkyService {
 	 * @return Number Number of occupied places
 	 */
 	async occupied(time) {
-		const date = utils.onlyDate(time)
-		const registered = await this.model.find({ date })
-		return registered.length
+		const date = utils.onlyDate(time);
+		const registered = await this.model.find({ date });
+		return registered.reduce((acc, v) => acc + v.people, 0);
 	}
 }
 

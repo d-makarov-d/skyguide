@@ -17,7 +17,8 @@ module.exports = (() => {
 			people: {
 				type: Number,
 				required: true,
-			}
+			},
+			pin: String,
 		});
 
 		if (model !== undefined) return model;

@@ -117,7 +117,14 @@ input:invalid {
     text-align: justify;
 }
 
-.col-low {
-    height: 30px !important;
-}
 .valign-wrapper {flex-wrap: wrap;}
+
+.bottomed {
+    position: fixed;
+    display: block;
+    bottom: 50px;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    width: 100%;
+}

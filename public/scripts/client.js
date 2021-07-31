@@ -1,4 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+	const allCenter = document.getElementsByClassName('all-center')[0];
+	const containers = document.getElementsByClassName('bottomable');
+	for (let i = 0; i < containers.length; i++) {
+		const container = containers[i];
+		let inp;
+		for (let ii = 0; ii < container.children.length; ii++) {
+			if (container.children[ii].tagName === 'INPUT') {
+				inp = container.children[ii];
+				break;
+			}
+		}
+		if (!inp) continue;
+
+		const removed = [];
+		const added = [];
+		inp.addEventListener('focus', () => {
+			const width  = window.innerWidth || document.documentElement.clientWidth ||
+				document.body.clientWidth;
+			if (width > 600) return
+			added.push('bottomed');
+			removed.push('col');
+			if (container.classList.contains('input-field')) {
+				removed.push('input-field');
+			}
+			added.forEach((prop) => container.classList.add(prop));
+			removed.forEach((prop) => container.classList.remove(prop));
+			allCenter.style.height = '100%';
+		})
+		inp.addEventListener('blur', () => {
+			const width  = window.innerWidth || document.documentElement.clientWidth ||
+				document.body.clientWidth;
+			if (width > 600) return
+			allCenter.style.height = 'unset';
+			added.forEach((prop) => container.classList.remove(prop));
+			removed.forEach((prop) => container.classList.add(prop));
+		})
+	}
+
 	const footer = document.getElementsByClassName('page-footer')[0];
 	footer.onclick = () => {
 		const container = document.getElementById('in-footer');
@@ -107,6 +145,7 @@ async function onClientSubmit() {
 	const datepicker = M.Datepicker.getInstance(datepickers[0])
 	const date = (new Date(new Date(datepicker.date.toDateString()) + ' GMT +0')).toISOString().slice(0, 10)
 	const people = document.getElementById('people').value
+	const pin = document.getElementById('pin').value
 
 	const resp = await fetch("/", {
 		method: 'POST',
@@ -114,7 +153,8 @@ async function onClientSubmit() {
 			name,
 			phone,
 			date,
-			people
+			people,
+			pin
 		}),
 		headers: {"Content-Type": "application/json"},
 	})

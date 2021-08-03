@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+	const hidables = document.getElementsByClassName('hidable')
 	const allCenter = document.getElementsByClassName('all-center')[0];
 	const containers = document.getElementsByClassName('bottomable');
 	for (let i = 0; i < containers.length; i++) {
@@ -17,7 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		inp.addEventListener('focus', () => {
 			const width  = window.innerWidth || document.documentElement.clientWidth ||
 				document.body.clientWidth;
-			if (width > 600) return
+			if (width > 600) return;
+			for (let ii = 0; ii < hidables.length; ii++) {
+				if (hidables[ii] === container) continue;
+				hidables[ii].style.display = 'none';
+			}
 			added.push('bottomed');
 			removed.push('col');
 			if (container.classList.contains('input-field')) {
@@ -30,7 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		inp.addEventListener('blur', () => {
 			const width  = window.innerWidth || document.documentElement.clientWidth ||
 				document.body.clientWidth;
-			if (width > 600) return
+			if (width > 600) return;
+			for (let ii = 0; ii < hidables.length; ii++) {
+				if (hidables[ii] === container) continue;
+				hidables[ii].style.display = 'unset';
+			}
 			allCenter.style.height = 'unset';
 			added.forEach((prop) => container.classList.remove(prop));
 			removed.forEach((prop) => container.classList.add(prop));
@@ -82,6 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		setDefaultDate: true
 	})[0];
 	datepicker.options.onSelect = onDateChange;
+	datepicker.options.onOpen = () => {
+		const height  = window.innerHeight || document.documentElement.clientHeight ||
+			document.body.clientHeight;
+		console.log(height)
+		if (height < 650) {
+			document.getElementsByClassName('datepicker-modal')[0].style.height = `${height*0.7}px`;
+		} else {
+			document.getElementsByClassName('datepicker-modal')[0].style.height = 'unset';
+		}
+	};
 
 	// init colapsable
 	const colapsables = document.querySelectorAll('.collapsible');
@@ -140,7 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
 async function onClientSubmit() {
 	// get elements
 	const name = document.getElementById('name').value
-	const phone = document.getElementById('phone').value
+	const phone = document.getElementById('phone')
+	if (phone.classList.contains('invalid')) return;
 	const datepickers = document.querySelectorAll('.datepicker');
 	const datepicker = M.Datepicker.getInstance(datepickers[0])
 	const date = (new Date(new Date(datepicker.date.toDateString()) + ' GMT +0')).toISOString().slice(0, 10)
@@ -151,7 +171,7 @@ async function onClientSubmit() {
 		method: 'POST',
 		body: JSON.stringify({
 			name,
-			phone,
+			phone: phone.value,
 			date,
 			people,
 			pin

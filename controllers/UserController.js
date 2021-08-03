@@ -13,8 +13,8 @@ class UserController {
 		this.router = express.Router();
 
 		this.router.get('/', async (req, res) => {
-			const now = utils.onlyDate(new Date())
-			const occupied = await this.skyService.occupied(now)
+			const now = utils.onlyDate(new Date());
+			const occupied = await this.skyService.occupied(now);
 			res.render(
 				path.resolve('public', 'layout', 'index'),
 				{

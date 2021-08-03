@@ -16,11 +16,11 @@
 			<div id="bg"></div>
 			<form id="reg_form" class="all-center" action="#">
 				<div class="row valign-wrapper">
-					<div class="col s12 m3 input-field inline bottomable">
+					<div class="col s12 m3 input-field inline bottomable hidable">
 						<input id="name" type="text" class="validate" required="required">
 						<label for="name">Имя заказчика</label>
 					</div>
-					<div class="col s12 m3 input-field inline bottomable">
+					<div class="col s12 m3 input-field inline bottomable hidable">
 						<input
 								id="phone"
 								type="text"
@@ -28,17 +28,17 @@
 						>
 						<label for="phone">Номер телефона</label>
 					</div>
-					<div class="col s6 m3">
+					<div class="col s6 m3 hidable">
 						<input id="date" type="text" class="datepicker" required="required">
 						<label for="date">Дата бронирования</label>
 					</div>
-					<div class="col s6 m3 inline bottomable">
+					<div class="col s6 m3 inline bottomable hidable">
 						<input type="number" value="1" id="people" class="validate" required="required">
 						<label for="people">Количество людей</label>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row hidable">
 					<div class="wtext col s6 m4 valign-wrapper">
 						<h6>Цена 1500 руб/билет</h6>
 					</div>
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row hidable">
 					<button
 							id="submit"
 							type="submit"

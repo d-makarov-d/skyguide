@@ -54,10 +54,6 @@ i.play-rot-end {
     width: 100%;
 }
 
-input:invalid {
-    border: red solid 3px;!important;
-}
-
 .all-center .collapsible {
     opacity: 70%;
 }
@@ -124,7 +120,11 @@ input:invalid {
     display: block;
     bottom: 50px;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 8px;
     width: 100%;
+}
+
+.input-field {
+    height: 30px;
 }
